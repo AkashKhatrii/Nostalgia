@@ -3,7 +3,7 @@
 
 <div class="homeContainer">
     <div class="homeWrapper">
-      <div class="main-def">
+      <div class="main-def" data-aos="fade-up">
         
           <h1>What is Nostalgia?</h1>
           <div class="main-def-para">
@@ -19,7 +19,7 @@
       </div>
       
       <div class="memory-def">
-        <div class="memory-def-content">
+        <div class="memory-def-content" data-aos="fade-right">
           <h2>Memories</h2>
           
 
@@ -41,18 +41,20 @@
           </p>
           <span><a href="/userMemory">Create a Memory</a></span>
         </div>
-        <div class="memory-def-image">
+        <div class="memory-def-image" data-aos="fade-up">
           <img src="/images/memory.png">
         </div>
       </div>
+
       <hr>
+
       <div class="blog-def">
-      <div class="blog-def-image">
+      <div class="blog-def-image" data-aos="fade-up">
         <img src="/images/memory.png">
       </div>
-      <div class="blog-def-content">
+      <div class="blog-def-content" data-aos="fade-left">
         <h2>Blogs</h2>
-        
+        <div class="blog-def-content-para">
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam
           vero labore id dolore numquam cum molestias repellat cupiditate
@@ -60,6 +62,7 @@
           asperiores numquam nesciunt distinctio praesentium ducimus veniam
           tempore consectetur atque.
         </p>
+      </div>
         <br>
         <h3>How to create a blog?</h3>
         <p>
@@ -78,6 +81,15 @@
   </div>
 
   <%- include('./partials/footer') -%>
+  <script src="/js/first.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      once: true,
+      offset: 200
+    });
+  </script>
 </body>
 
 

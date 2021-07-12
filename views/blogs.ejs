@@ -4,8 +4,14 @@
 
 
 <div class="blogs-container">
+ <% let i = 1 %>
 <% displayBlogs.forEach(function(blog){ %>
-    <div class="blog">
+  <% if(i %2 == 0){ %>
+    <div class="blog" data-aos="fade-left">
+    <% } else { %>
+    <div class="blog" data-aos="fade-right">
+   <% } %>
+    <% i = i + 1 %>
       <div class="blog-container">
         <div class="blogTitle">
           <h2><%= blog.title %></h2>
@@ -32,5 +38,14 @@
 <% }) %>
   </div>
   <%- include('./partials/footer') -%>
+  <script src="/js/first.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      once: true,
+      offset: 200
+    });
+  </script>
 </body>
 

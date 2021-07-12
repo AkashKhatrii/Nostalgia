@@ -4,12 +4,17 @@
 <div class="cards-container">
     <% displayMemories.forEach(function(memory){ %>
     
-    <div class="card">
+    <div class="card" data-aos="fade-up">
       <div class="card-container">
         <div class="image">
             <% if(memory.image){ %>
-            <img src="./uploads/<%= memory.image%>" alt="Image">
+            <img src="./uploads/<%= memory.image%>" alt="memImage">
             <% } %>
+            <div class="writer-img">
+              <% if(memory.image){ %>
+                <img src="./uploads/<%= memory.image%>" alt="userImage">
+                <% } %>
+            </div>
         </div>
         <div class="title">
           <h2><%= memory.title %></h2>
@@ -23,10 +28,23 @@
           </p>
         </div>
         <span class="author"><%= "-" + memory.author %></span>
+        <div class="like-comment">
+          <span>Like</span>
+          <span>Comment</span>
+        </div>
       </div>
     </div>
 
     <% }) %>
   </div>
   <%- include('./partials/footer') -%>
+  <script src="/js/first.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      once: true,
+      offset: 200
+    });
+  </script>
 </body>

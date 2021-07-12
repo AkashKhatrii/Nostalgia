@@ -1,0 +1,36 @@
+<%- include('./partials/header') -%>
+
+
+
+
+<div class="blogs-container">
+<% displayBlogs.forEach(function(blog){ %>
+    <div class="blog">
+      <div class="blog-container">
+        <div class="blogTitle">
+          <h2><%= blog.title %></h2>
+        </div>
+        <hr />
+        <div class="blogIntro">
+          <h3>Introduction:</h3>
+          <p><%= blog.intro.substring(0, 120) + "..." %></p>
+        </div>
+        <hr />
+        <div class="blogBody">
+          <h3>Body:</h3>
+          <p><%= blog.body1 + "..." %> 
+          <a href="/blogs/<%= blog._id %>">Read More</a></p>
+          <!-- <p><%= blog.body2 %></p>
+          <p><%= blog.body3 %></p> -->
+        </div>
+        <!-- <div class="blogConclusion">
+          <h3>Conclusion:</h3>
+          <p><%= blog.conclusion %></p>
+        </div> -->
+      </div>
+    </div>
+<% }) %>
+  </div>
+  <%- include('./partials/footer') -%>
+</body>
+

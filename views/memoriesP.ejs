@@ -1,0 +1,32 @@
+<%- include('./partials/header') -%>
+
+
+<div class="cards-container">
+    <% displayMemories.forEach(function(memory){ %>
+    
+    <div class="card">
+      <div class="card-container">
+        <div class="image">
+            <% if(memory.image){ %>
+            <img src="./uploads/<%= memory.image%>" alt="Image">
+            <% } %>
+        </div>
+        <div class="title">
+          <h2><%= memory.title %></h2>
+        </div>
+        <div class="date">
+          <span><%= memory.date %></span>
+        </div>
+        <div class="body">
+          <p>
+            <%= memory.body %>
+          </p>
+        </div>
+        <span class="author"><%= "-" + memory.author %></span>
+      </div>
+    </div>
+
+    <% }) %>
+  </div>
+  <%- include('./partials/footer') -%>
+</body>

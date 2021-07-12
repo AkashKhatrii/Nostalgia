@@ -1,0 +1,33 @@
+
+
+<%- include('./partials/header') -%>
+
+<form action="/writeMemory" method="POST" class="memform" enctype="multipart/form-data">
+    <div class="form-container">
+        <div class="form-component">
+            <label>Author Name:</label>
+            <input type="text" class="form-control" name="memoryAuthor" autocomplete="off">
+        </div>
+<div class="form-component">
+    <label>Title:</label>
+    <input type="text" class="form-control" name="memoryTitle" autocomplete="off">
+</div>
+<div class="form-component">
+    <label>Memory date:</label>
+    <input type="text" class="form-control" name="memoryDate" autocomplete="off">
+</div>
+<div class="form-component">
+    <label>Memory:</label>
+    <textarea name="memoryBody" class="form-control" rows="7" cols="15" ></textarea>
+</div>
+<div class="form-component image-input">
+    <label>Insert image(if any):</label>
+    <input type="file" class="form-control" name="memoryImage" accept="image/*">
+</div>
+
+<button type="submit" name="button" class="btn">Publish</button>
+</div>
+
+</form>
+<%- include('./partials/footer') -%>
+</body>

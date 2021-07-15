@@ -1,8 +1,8 @@
 <%- include('./partials/header') -%>
 
 
-
-<div class="single-blog-container">
+<link rel="stylesheet" href="css/blog.css">
+<div class="single-blog-container" data-aos="fade-up">
     <div class="single-blog-title">
 
       <h1><%= title %></h1>
@@ -27,5 +27,13 @@
 
   <%- include('./partials/footer') -%>
   <script src="/js/first.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      once: true,
+      offset: 200
+    });
+  </script>
 </body>
 

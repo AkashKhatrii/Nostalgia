@@ -1,0 +1,157 @@
+.homeWrapper p {
+  line-height: 1.8rem;
+}
+
+.homeContainer {
+  width: 95%;
+  margin: 0 auto;
+  color: white;
+}
+
+.homeWrapper {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.homeWrapper hr {
+  width: 100px;
+  height: 2px;
+  background-color: #151424;
+  margin: 0 auto;
+}
+
+.main-def {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-def-para {
+  width: 100%;
+  text-align: center;
+}
+
+.memory-def {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: 1.8fr 1.5fr;
+  color: white;
+}
+
+.memory-def-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.memory-def-content p {
+  word-wrap: break-word;
+  letter-spacing: 0.5px;
+  font-size: 1.2rem;
+}
+
+.memory-def-content span {
+  width: 150px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #151424; */
+  background-color: #6a5acd;
+  color: white;
+  align-self: flex-end;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.memory-def-content span a {
+  color: white;
+}
+
+.memory-def-content hr {
+  background-color: #151424;
+  margin-top: 0.8rem;
+}
+
+.blog-def {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  color: white;
+}
+
+.blog-def-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-def-content p {
+  word-wrap: break-word;
+  margin-right: 1rem;
+}
+
+.blog-def-content span {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #151424;
+  align-self: flex-end;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.blog-def-content span a {
+  color: white;
+}
+.memory-def-image {
+  padding-left: 150px;
+  height: 400px;
+}
+
+.blog-def-image {
+  padding-right: 150px;
+  height: 400px;
+}
+
+.memory-def-image img,
+.blog-def-image img {
+  height: 380px;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 700px) {
+  .main-def-para {
+    width: 90%;
+  }
+
+  .memory-def,
+  .blog-def {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .memory-def-image {
+    padding: 0;
+    align-self: center;
+    margin-top: 20px;
+    height: 400px;
+  }
+
+  .blog-def-image {
+    padding: 0px;
+    margin: 0 auto;
+    width: 380px;
+    height: 400px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .memory-def-image {
+    width: 350px;
+    margin: 0 auto;
+  }
+}

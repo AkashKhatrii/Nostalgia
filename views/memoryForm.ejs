@@ -1,9 +1,12 @@
 
 
 <%- include('./partials/header') -%>
-
+<link rel="stylesheet" href="css/form.css">
 <form action="/userMemory" method="POST" class="memform" enctype="multipart/form-data">
     <div class="form-container">
+        <div class="top-shadow">
+            <h2>...</h2>
+        </div>
         <div class="form-component">
             <label>Author Name:</label>
             <input type="text" class="form-control" name="memoryAuthor" autocomplete="off">

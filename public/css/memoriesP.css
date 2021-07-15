@@ -1,0 +1,166 @@
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  row-gap: 50px;
+}
+
+.card {
+  width: 250px;
+  height: 400px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+
+  border-radius: 8px;
+  position: relative;
+  background-color: white;
+}
+
+.card-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  height: 40%;
+  width: 100%;
+  position: relative;
+  background-color: rgba(177, 50, 50, 0.15);
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  object-fit: cover;
+}
+
+.writer-img {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+}
+
+.writer-img img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.writer-img::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  bottom: -5px;
+  right: -5px;
+  border-radius: 50%;
+  background: white;
+  z-index: -1;
+}
+
+.title {
+  margin-top: 1rem;
+  height: 10%;
+  width: 100%;
+}
+
+.title h2 {
+  padding: 0.7rem 0.4rem 0 0.4rem;
+  font-family: "Sacramento", cursive;
+}
+.date {
+  margin-top: -0.7rem;
+  align-self: flex-end;
+  height: 4%;
+  color: #989898;
+  padding-top: 0px;
+  padding-right: 0.82rem;
+}
+
+.body {
+  margin-top: 0.7rem;
+  height: 30%;
+  width: 100%;
+  padding: 0rem 0.4rem;
+  overflow: hidden;
+}
+
+.author {
+  position: absolute;
+  width: 100%;
+  bottom: 35px;
+  right: 15px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.like-comment {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: #edf3f3;
+}
+.like-comment span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-right: 2px solid white;
+}
+
+.like-comment span:nth-child(2) {
+  border-right: 0;
+}
+
+@media only screen and (max-width: 1150px) {
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(350px, auto);
+    width: 95%;
+    /* overflow: hidden; */
+  }
+
+  .card {
+    width: 220px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: minmax(350px, auto);
+    width: 100%;
+  }
+
+  .card {
+    width: 240px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(350px, auto);
+    width: 100%;
+  }
+
+  .card {
+    width: 260px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,115 @@
+form {
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+}
+label {
+  font-weight: 650;
+  margin-bottom: 0.25rem;
+}
+
+input {
+  line-height: 1.7rem;
+  border: none;
+  outline: none;
+  border-bottom: 1.2px solid black;
+  background-color: transparent;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+input:focus {
+  outline: none !important;
+  border-color: #719ece;
+  border-radius: 3px;
+  box-shadow: 0 0 12px #719ece;
+}
+
+.memform {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 9vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container .top-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  overflow: hidden;
+  background-color: #808080;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.form-container .top-shadow h2 {
+  margin-left: 10px;
+  margin-top: -10px;
+}
+
+.form-component {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3vh;
+}
+
+.image-input {
+  display: flex;
+  flex-direction: row;
+}
+.image-input input {
+  margin-left: 7%;
+  border: none;
+}
+
+textarea {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1.5px solid black;
+
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+textarea:focus {
+  outline: none !important;
+  border-color: #719ece;
+  border-radius: 3px;
+  box-shadow: 0 0 12px #719ece;
+}
+
+.memform button {
+  display: block;
+  margin: 0 auto;
+  padding: 9px 11px;
+  background-color: #151424;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.f-blogBody {
+  margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 1150px) {
+  .memform {
+    width: 55%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .memform {
+    width: 90%;
+  }
+}

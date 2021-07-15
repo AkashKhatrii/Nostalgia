@@ -1,6 +1,6 @@
 <%- include('./partials/header') -%>
 
-
+<link rel="stylesheet" href="css/memoriesP.css">
 <div class="cards-container">
     <% displayMemories.forEach(function(memory){ %>
     
@@ -8,7 +8,7 @@
       <div class="card-container">
         <div class="image">
             <% if(memory.image){ %>
-            <img src="./uploads/<%= memory.image%>" alt="memImage">
+            <img src="../uploads/<%= memory.image%>" alt="memImage">
             <% } %>
             <div class="writer-img">
               <% if(memory.image){ %>
@@ -24,7 +24,8 @@
         </div>
         <div class="body">
           <p>
-            <%= memory.body %>
+            <%= memory.body.substring(0, 127) + "..."%>
+            <a href="/memories/<%= memory._id %>">Read More</a>
           </p>
         </div>
         <span class="author"><%= "-" + memory.author %></span>

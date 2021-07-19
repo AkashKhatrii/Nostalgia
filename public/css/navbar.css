@@ -66,6 +66,7 @@ nav ul li a:hover {
   }
   .menu-card {
     display: block;
+    color: black;
   }
   .nav-left {
     width: 100%;
@@ -100,6 +101,10 @@ nav ul li a:hover {
   nav ul li a {
     font-size: 1.3rem;
     color: black;
+  }
+
+  nav ul li a:hover{
+    border: none;
   }
 
   .container {

@@ -10,7 +10,7 @@
   margin-right: 3rem;
 }
 
-span {
+.create-btn span {
   width: 150px;
   height: 40px;
   display: flex;
@@ -24,7 +24,7 @@ span {
   border-radius: 7px;
 }
 
-span a {
+.create-btn span a {
   color: white;
 }
 

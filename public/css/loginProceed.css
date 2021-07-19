@@ -1,0 +1,32 @@
+.proceed{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.proceed p{
+
+    font-size: 2rem;
+    color: white;
+}
+
+.proceed span{
+    width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #151424; */
+  background-color: black;
+  color: white;
+  
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.proceed span a{
+    color: white;
+}

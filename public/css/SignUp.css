@@ -1,0 +1,74 @@
+.registerForm{
+  background-color: white;
+  width: 65%;
+  margin: 0 auto;
+  margin-top: 8rem;
+}
+
+
+.registerForm input[type=text],.registerForm input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.registerForm input[type=text]:focus, .registerForm input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.registerForm hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+
+.registerForm button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerForm button:hover {
+  opacity:1;
+}
+
+
+.registerForm .cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+
+.registerForm .cancelbtn, .registerForm .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+
+.registerForm .formContainer {
+  padding: 16px;
+}
+
+
+.registerForm .clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+@media screen and (max-width: 300px) {
+  .registerForm .cancelbtn,.registerForm .signupbtn {
+    width: 100%;
+  }
+}
+

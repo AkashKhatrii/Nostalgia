@@ -2,13 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const alert = require('alert')
 const path = require('path');
 
-
 const app = express();
+
+
 // IMPORTING MODELS
 const Blog = require('./models/blog.js');
-const Memory = require('./models/memory.js')
+const Memory = require('./models/memory.js');
+const User = require('./models/user.js')
 
 // MIDDLEWARES
 app.use(express.json());
@@ -21,6 +24,13 @@ app.use(express.static("public"));
 
 // CONNECTING TO DATABASE
 mongoose.connect("mongodb://localhost:27017/NostalgiaDB", {useNewUrlParser: true})
+
+
+
+
+var loggedIn = false
+var loggedInUser = ""
+
 
 var storage = multer.diskStorage({
     destination: "./public/uploads/",
@@ -70,6 +80,12 @@ app.get("/userBlog", function(req,res){
 
 app.get("/blogs", function(req, res){
 
+    if(!loggedIn){
+        
+        res.redirect("/loginProceed")
+      
+    }
+    else{
     Blog.find().sort({ createdAt: -1})
     .then((result) => {
         res.render("blogs", {
@@ -79,6 +95,7 @@ app.get("/blogs", function(req, res){
     .catch((err) => {
         console.log(err);
     });
+}
 
 
     // })
@@ -152,9 +169,56 @@ app.post("/userBlog", upload, function(req, res){
  })
 
 
+app.post("/register", (req, res) => {
+    const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        confirmpassword: req.body.confirm
+    })
 
+    newUser.save((err) => {
+        if(!err){
+            res.redirect("/register")
+            console.log("Added")
+        }
+    })
+})
 
+app.post("/login", (req, res) => {
+    var userName = req.body.username;
+    var password = req.body.userpassword;
 
+    User.findOne({ email: userName})
+    .then((result) => {
+        if(password == result.password){
+            res.redirect("/")
+            loggedIn = true
+            loggedInUser = result.email
+            console.log(loggedInUser)
+        console.log(result)
+        }
+        else{
+            res.redirect("/login")
+            console.log("Bhaag")
+        }
+    })
+    .catch((err) => {
+        console.log("No user");
+    })
+})
+
+app.get("/register", (req, res) =>{
+    res.render("register")
+})
+
+app.get("/login", (req, res) => {
+    res.render("login")
+})
+
+app.get("/loginProceed", (req, res) => {
+    res.render("loginProceed")
+})
 
 app.listen(3000, function(){
     

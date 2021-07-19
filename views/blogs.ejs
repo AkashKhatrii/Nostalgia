@@ -1,8 +1,12 @@
 <%- include('./partials/header') -%>
 
 
-<link rel="stylesheet" href="css/blogs.css">
+<link rel="stylesheet" href="/css/blogs.css">
 
+<div class="blogs-wrapper">
+<div class="create-btn">
+  <span><a href="/userBlog">Write a Blog</a></span>
+</div>
 <div class="blogs-container">
  <% let i = 1 %>
 <% displayBlogs.forEach(function(blog){ %>
@@ -12,7 +16,10 @@
     <div class="blog" data-aos="fade-right">
    <% } %>
     <% i = i + 1 %>
+    
       <div class="blog-container">
+    <div class="vertical-line"></div>
+
         <div class="blogTitle">
           <h2><%= blog.title %></h2>
         </div>
@@ -29,16 +36,37 @@
           <!-- <p><%= blog.body2 %></p>
           <p><%= blog.body3 %></p> -->
         </div>
+
+  
         <!-- <div class="blogConclusion">
           <h3>Conclusion:</h3>
           <p><%= blog.conclusion %></p>
         </div> -->
       </div>
     </div>
+    
+    
 <% }) %>
   </div>
+</div>
   <%- include('./partials/footer') -%>
   <script src="/js/first.js"></script>
+  <script>
+    var line = document.getElementsByClassName('vertical-line');
+    function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  for(var i = 0; i < line.length; i ++){
+    line[i].style.backgroundColor = getRandomColor();
+  }
+
+  </script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init({

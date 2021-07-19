@@ -1,6 +1,11 @@
 <%- include('./partials/header') -%>
 
 <link rel="stylesheet" href="css/memoriesP.css">
+
+<div class="memories-wrapper">
+<div class="create-btn">
+  <span><a href="/userBlog">Write a Memory</a></span>
+</div>
 <div class="cards-container">
     <% displayMemories.forEach(function(memory){ %>
     
@@ -38,6 +43,7 @@
 
     <% }) %>
   </div>
+</div>
   <%- include('./partials/footer') -%>
   <script src="/js/first.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

@@ -1,17 +1,22 @@
 .container {
   width: 100%;
   min-height: 12vh;
-  background-color: #151424;
+  /* background-color: #151424; */
+  background-color: white;
   color: white;
   display: flex;
   padding: 0px 1.4rem;
   align-items: center;
   z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .nav-left {
   width: 25%;
-  color: white;
+  /* color: white; */
+  color: black;
   justify-self: flex-start;
   margin-left: 75px;
 }
@@ -38,12 +43,14 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: white;
-  font-size: 1.2rem;
+  /* color: white; */
+  color: black;
+  font-size: 1.3rem;
+  font-weight: 500;
 }
 
 nav ul li a:hover {
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid black;
 }
 
 .menu-card {

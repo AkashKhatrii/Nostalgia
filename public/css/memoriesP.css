@@ -1,3 +1,33 @@
+
+.memories-wrapper{
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-btn{
+  align-self: flex-end;
+  margin-right: 3rem;
+}
+
+span {
+  width: 150px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #151424; */
+  background-color: #6a5acd;
+  color: white;
+  
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+span a {
+  color: white;
+}
+
 .cards-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

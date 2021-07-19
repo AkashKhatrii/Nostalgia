@@ -4,7 +4,7 @@
 
 .homeContainer {
   width: 95%;
-  margin: 0 auto;
+  margin: 4rem auto;
   color: white;
 }
 
@@ -31,6 +31,8 @@
 .main-def-para {
   width: 100%;
   text-align: center;
+  letter-spacing: 0.5px;
+  font-size: 1.2rem;
 }
 
 .memory-def {
@@ -122,6 +124,25 @@
   object-fit: cover;
 }
 
+@media only screen and (max-width: 1150px) {
+  .memory-def-image{
+    padding-left: 20px;
+    
+  }
+
+  .memory-def-image img{
+    width: 400px;
+  }
+
+  .blog-def-image{
+    padding-right: 25px;
+    
+  }
+
+  .blog-def-image img{
+    width: 400px;
+  }
+}
 @media only screen and (max-width: 700px) {
   .main-def-para {
     width: 90%;
@@ -143,6 +164,7 @@
 
   .blog-def-image {
     padding: 0px;
+    align-self: center;
     margin: 0 auto;
     width: 380px;
     height: 400px;

@@ -1,18 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const app = express();
 const multer = require('multer');
 const path = require('path');
-// const fs = require('fs');
 
+
+const app = express();
+// IMPORTING MODELS
+const Blog = require('./models/blog.js');
+const Memory = require('./models/memory.js')
+
+// MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
-}))
-
+}));
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
+
+
+// CONNECTING TO DATABASE
+mongoose.connect("mongodb://localhost:27017/NostalgiaDB", {useNewUrlParser: true})
 
 var storage = multer.diskStorage({
     destination: "./public/uploads/",
@@ -26,29 +34,6 @@ var upload = multer({
 }).single('memoryImage');
 
 
-mongoose.connect("mongodb://localhost:27017/NostalgiaDB", {useNewUrlParser: true})
-
-const memorySchema = {
-    title: String,
-    date: String,
-    body: String,
-    author: String,
-    image: String
-
-}
-
-const blogSchema = {
-    title: String,
-    intro: String,
-    body1: String,
-    body2: String,
-    body3: String,
-    conclusion: String,
-    image: String
-}
-
-const Memory = mongoose.model("Memory", memorySchema);
-const Blog = mongoose.model("Blog", blogSchema);
 
 app.get("/", function(req, res){
 
@@ -59,11 +44,22 @@ app.get("/", function(req, res){
 
 app.get("/memories", function(req, res){
 
-    Memory.find({}, function(err, foundMemories){
+    Memory.find().sort({ createdAt: -1 })
+    .then((result) => {
         res.render("memoriesP", {
-          displayMemories: foundMemories
-          });
-      });
+
+            displayMemories: result
+            });
+    
+        }) 
+    .catch((err) => {
+        console.log(err);
+    })   
+    // Memory.find({}, function(err, foundMemories){
+    //     res.render("memoriesP", {
+    //       displayMemories: foundMemories
+    //       });
+    //   });
     
 });
 
@@ -73,11 +69,24 @@ app.get("/userBlog", function(req,res){
 })
 
 app.get("/blogs", function(req, res){
-    Blog.find({}, function(err, foundBlogs){
+
+    Blog.find().sort({ createdAt: -1})
+    .then((result) => {
         res.render("blogs", {
-          displayBlogs: foundBlogs
-          });
-      });
+            displayBlogs: result
+            });
+        })
+    .catch((err) => {
+        console.log(err);
+    });
+
+
+    // })
+    // Blog.find({}, function(err, foundBlogs){
+    //     res.render("blogs", {
+    //       displayBlogs: foundBlogs
+    //       });
+    //   });
     
 });
 

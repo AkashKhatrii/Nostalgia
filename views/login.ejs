@@ -1,0 +1,27 @@
+<%- include('./partials/header') -%>
+
+<link rel="stylesheet" href="/css/Login.css">
+<form action="login" method="post" class="loginForm">
+    <div class="imgcontainer">
+      <img src="/images/login.png" alt="Avatar" class="avatar" />
+    </div>
+
+    <div class="loginContainer">
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter email" name="username" required />
+
+      <label for="psw"><b>Password</b></label>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        name="userpassword"
+        required
+      />
+
+      <button type="submit">Login</button>
+    </div>
+
+    <!-- <div class="btncontainer" style="background-color: #f1f1f1">
+      <button type="button" class="cancelbtn">Cancel</button>
+    </div> -->
+  </form>

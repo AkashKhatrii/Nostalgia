@@ -9,15 +9,25 @@ const app = express();
 
 
 // IMPORTING MODELS
-const Blog = require('./models/blog.js');
+// const Blog = require('./models/blog.js');
 const Memory = require('./models/memory.js');
 const User = require('./models/user.js')
 const Like = require("./models/Like.js")
 
 
-// IMPORTING ROUTES
-const blogRoutes = require("./routes/blogRoutes.js")
 
+const blogSchema = mongoose.Schema({
+    title: String,
+    intro: String,
+    body1: String,
+    body2: String,
+    body3: String,
+    conclusion: String
+}, {timestamps: true});
+
+const Blog = mongoose.model("Blog", blogSchema);
+
+// IMPORTING ROUTES
 
 // MIDDLEWARES
 app.use(express.json());
@@ -25,7 +35,8 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.set('view engine', 'ejs');
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static(__dirname + '/public'));
 
 app.use( function( req, res, next ) {
 
@@ -46,6 +57,9 @@ mongoose.connect("mongodb://localhost:27017/NostalgiaDB", {useNewUrlParser: true
 var loggedIn = false
 var loggedInUser = ""
 var msg = ''
+var posts = []
+let likedpost = ''
+
 
 var storage = multer.diskStorage({
     destination: "./public/uploads/",
@@ -60,6 +74,31 @@ var upload = multer({
 
 
 // ROUTES
+app.post("/userBlog", function(req, res){
+
+    console.log("Req body: " + req.body)
+    console.log("Req Title: "+ req.body.blogTitle)
+    const newBlog = new Blog({
+        title: req.body.blogTitle,
+        intro: req.body.blogIntro,
+        body1: req.body.blogBody1,
+        body2: req.body.blogBody2,
+        body3: req.body.blogBody3,
+        conclusion: req.body.blogConclusion,
+        
+    })
+
+    console.log("New blog" + newBlog)
+ 
+    newBlog.save(function(err){
+     if (!err){
+         res.redirect("blogs");
+         
+     }
+   });
+ 
+ 
+ });
 
 app.post("/register", (req, res) => {
     const newUser = new User({
@@ -72,9 +111,11 @@ app.post("/register", (req, res) => {
     newUser.save((err) => {
         if(!err){
             res.redirect("/register")
-            console.log("Added")
+           
         }
     })
+
+    
 })
 
 app.post("/login", (req, res) => {
@@ -87,8 +128,7 @@ app.post("/login", (req, res) => {
             res.redirect("/")
             loggedIn = true
             loggedInUser = result.email
-            console.log(loggedInUser)
-        console.log(result)
+            
         }
         else{
 
@@ -124,7 +164,7 @@ app.get("/loginProceed", (req, res) => {
 
 app.get("/", function(req, res){
 
-    res.render("home");
+    res.render("home", {user: loggedInUser});
   
 
 })
@@ -135,15 +175,18 @@ app.get("/memories", function(req, res){
 
     if(!loggedIn){
         
+        
         res.redirect("/loginProceed")
       
     }
     else{
+        
     Memory.find().sort({ createdAt: -1 })
     .then((result) => {
         res.render("memoriesP", {
 
-            displayMemories: result
+            displayMemories: result,
+            user: loggedInUser
             });
     
         }) 
@@ -162,12 +205,14 @@ app.get("/userMemory", function(req, res){
       
     }
     else{
-    res.render("memoryForm");
+    res.render("memoryForm", {user: loggedInUser});
     }
 });
 
 
 app.post("/userMemory", upload, function(req, res){
+
+    console.log("Req body: " + req.body)
    const newMemory = new Memory({
        title: req.body.memoryTitle,
        date: req.body.memoryDate,
@@ -176,10 +221,11 @@ app.post("/userMemory", upload, function(req, res){
        image: req.file.filename
    })
 
+   
    newMemory.save(function(err){
     if (!err){
         res.redirect("/memories");
-        console.log("Data saved to database")
+
     }
   });
 
@@ -234,38 +280,25 @@ app.get("/blogs/:blogId", function(req, res){
 });
 
 
-app.post("/userBlog", function(req, res){
-    const newBlog = new Blog({
-        title: req.body.blogTitle,
-        intro: req.body.blogIntro,
-        body1: req.body.blogBody1,
-        body2: req.body.blogBody2,
-        body3: req.body.blogBody3,
-        conclusion: req.body.blogConclusion,
-        
-    })
- 
-    newBlog.save(function(err){
-     if (!err){
-         res.redirect("/blogs");
-         console.log("Data saved to database")
-     }
-   });
- 
- 
- });
-
 
 
 app.put( '/memories/:memoryId', function ( req, res ) {
     // delete operation stuff
     const likememory = req.params.memoryId
-    console.log(typeof(likememory))
-    console.log(likememory)
-    console.log(loggedInUser)
     
+    Memory.findOne({_id: likememory})
+    .then((result) => {
+        likedpost = result
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
+   
+
+
     User.findOneAndUpdate({email: loggedInUser},
-        {$addToSet: {memorylikes: likememory}},
+        {$addToSet: {likedmemories: likedpost}},
         {safe: true, upsert: true},
         function(err, doc) {
             if(err){
@@ -276,15 +309,41 @@ app.put( '/memories/:memoryId', function ( req, res ) {
         }
     );
     
-
+    likedpost = ''
     
     res.redirect("/memories")
   });
 
 
-app.get("/user/:userId/savedPosts", (req, res) => {
-    res.send("Hi");
+app.get('/memories/:memoryviewId', (req, res) => {
+    const requestedmemoryId = req.params.memoryviewId;
+    Memory.findOne({_id: requestedmemoryId}, function(err, memory){
+        res.render("memory", {
+            title: memory.title,
+            date: memory.date,
+            body: memory.body,
+            author: memory.author,
+            likes: memory.likes,
+            image: memory.image
+        });
+      });
 })
+
+app.get("/user/savedmemories", (req, res) => {
+
+    // var userS = req.params.userEmail
+    
+    User.findOne({email: loggedInUser})
+    .then((result) => {
+        res.render("savedMemories", {saved: result.likedmemories});
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+})
+        
+
+
 
 app.listen(3000, function(){
     

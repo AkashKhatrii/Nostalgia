@@ -59,7 +59,8 @@ var loggedInUser = ""
 var msg = ''
 var posts = []
 let likedpost = ''
-
+let savedBlogPost = ''
+let contactmsg = ''  
 
 var storage = multer.diskStorage({
     destination: "./public/uploads/",
@@ -212,7 +213,7 @@ app.get("/userMemory", function(req, res){
 
 app.post("/userMemory", upload, function(req, res){
 
-    console.log("Req body: " + req.body)
+
    const newMemory = new Memory({
        title: req.body.memoryTitle,
        date: req.body.memoryDate,
@@ -289,29 +290,54 @@ app.put( '/memories/:memoryId', function ( req, res ) {
     Memory.findOne({_id: likememory})
     .then((result) => {
         likedpost = result
+        User.findOneAndUpdate({email: loggedInUser},
+            {$addToSet: {likedmemories: likedpost}},
+            {safe: true, upsert: true},
+            function(err, doc) {
+                if(err){
+                console.log(err);
+                }else{
+                console.log("Updated")
+                }
+            }
+        );
     })
     .catch((err) => {
         console.log(err)
     })
-
-   
-
-
-    User.findOneAndUpdate({email: loggedInUser},
-        {$addToSet: {likedmemories: likedpost}},
-        {safe: true, upsert: true},
-        function(err, doc) {
-            if(err){
-            console.log(err);
-            }else{
-            console.log("Updated")
-            }
-        }
-    );
+    
     
     likedpost = ''
     
     res.redirect("/memories")
+  });
+
+    app.put( '/blogs/save/:blogId', function ( req, res ) {
+        // delete operation stuff
+        const saveblog = req.params.blogId
+        
+        Blog.findOne({_id: saveblog})
+        .then((result) => {
+            savedBlogPost = result
+            User.findOneAndUpdate({email: loggedInUser},
+                {$addToSet: {savedblogs: savedBlogPost}},
+                {safe: true, upsert: true},
+                function(err, doc) {
+                    if(err){
+                    console.log(err);
+                    }else{
+                    console.log("Updated")
+                    }
+                }
+            );
+        })
+        .catch((err) => {
+            console.log(err)
+        })   
+    
+    savedBlogPost = ''
+    
+    res.redirect("/blogs")
   });
 
 
@@ -341,9 +367,34 @@ app.get("/user/savedmemories", (req, res) => {
                 console.log(err)
             })
 })
+
+app.get("/user/savedblogs" , (req, res) => {
+
+    User.findOne({email: loggedInUser})
+    .then((result) => {
+        res.render("blogs", {displayBlogs: result.savedblogs});
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+})
+
+app.get("/contact", (req, res) => {
         
+    res.render("contact", { msg: contactmsg })
+    contactmsg = ''
+} )
 
-
+app.post("/contact", (req, res) => {
+    contactmsg = "Thank you for contacting us. We will reach back to you shortly."
+        
+    res.redirect("/contact")    
+})
+app.get("/logout", (req, res) => {
+    loggedIn = false
+    loggedInUser = ""
+    res.redirect("/")
+})
 
 app.listen(3000, function(){
     
